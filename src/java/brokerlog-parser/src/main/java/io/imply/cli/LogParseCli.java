@@ -258,13 +258,13 @@ public class LogParseCli
 
   private void writeHeader(FileWriter parseDataWriter) throws IOException
   {
-    parseDataWriter.write( "eventtime,querytype,datasource," +
-                           "queryid,sqlqueryid,"+
-                           "implyDataCube,implyFeature," +
-                           "implyUser,implyView,"+
-                           "priority,recency,duration,"+
-                           "filterseq,filter,grouping,"+
-                           "clusterId");
+    parseDataWriter.write( "\"eventtime\",\"querytype\",\"datasource\"," +
+                           "\"queryid\",\"sqlqueryid\","+
+                           "\"implyDataCube\",\"implyFeature\"," +
+                           "\"implyUser\",\"implyView\","+
+                           "\"priority\",\"recency\",\"duration\","+
+                           "\"filterseq\",\"filter\",\"grouping\","+
+                           "\"implyCloudAccountId\",\"clusterId\"");
     parseDataWriter.write("\n");
     parseDataWriter.flush();
   }
@@ -288,19 +288,19 @@ public class LogParseCli
      */
     // eventtime, querytype, datasource
     if(entry.query.getDataSource().getTableNames().toArray().length >0){
-      parseDataWriter.write(dateFormat.format(entry.eventTime) + "," + entry.type + "," + entry.query.getDataSource().getTableNames().toArray()[0] + "," +
+      parseDataWriter.write("\"" +dateFormat.format(entry.eventTime) + "\"" + "," + "\"" + entry.type + "\"" + "," + "\"" + entry.query.getDataSource().getTableNames().toArray()[0] + "\"" + "," +
                   // queryid,sqlqueryid
-                  entry.query.getId() + "," + entry.query.getSqlQueryId() + "," +
+                  "\"" + entry.query.getId() + "\"" + "," + "\"" + entry.query.getSqlQueryId() + "\"" + "," +
                   // implyDataCube, implyFeature
-                  entry.query.getContext().get("implyDataCube") + "," + entry.query.getContext().get("implyFeature") + "," +
+                  "\"" + entry.query.getContext().get("implyDataCube") + "\"" + "," + "\"" + entry.query.getContext().get("implyFeature") + "\"" + "," +
                   // implyUser, implyView
-                  entry.query.getContext().get("implyUser") + "," + entry.query.getContext().get("implyView") + "," +
+                  "\"" + entry.query.getContext().get("implyUser") + "\"" + "," + "\""+ entry.query.getContext().get("implyView") + "\"" + "," +
                   // priority, recency, duration
-                  entry.query.getContext().get("priority") + ","+ recency/1000 + ","+duration/1000  + ","+
+                  "\"" + entry.query.getContext().get("priority") + "\"" + "," + "\""+ recency/1000 + "\"" + ","+ "\""+ duration/1000 + "\"" + ","+
                   //filterseq , filter
-                  count + "," + filter +","+grouping+ ","+
-                  //implyCloudAccountId , clusterId
-                            implyCloudAccountId +","+clusterId);
+                  "\"" + count + "\"" + "," + "\"" + filter + "\"" + "," + "\"" + grouping + "\"" + ","+
+                  // clusterId
+                  "\"" + implyCloudAccountId + "\"" + "," + "\"" + clusterId + "\"");
       parseDataWriter.write("\n");
       parseDataWriter.flush();
     }else{

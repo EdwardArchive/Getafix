@@ -6,7 +6,7 @@
 
   <groupId>io.imply</groupId>
   <artifactId>brokerlog-parser</artifactId>
-  <version>2.4</version>
+  <version>2.4.2</version>
 
   <name>imply-tools</name>
   <description>To parse broker logs</description>

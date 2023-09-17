@@ -97,8 +97,12 @@ public class LogParser
               return new LogEntry(dateTime.toDate(), type, query);
             }
             catch (JsonProcessingException e) {
-              System.out.println(" Line:" + line );
-              e.printStackTrace();
+               logger.log(Level.WARN ,  "Unable to parse log line in by error JSON processing "+logFile.getAbsolutePath() + " starting with  line " + logLine.substring(0, 60));
+               break;
+            }
+            catch (Exception e) {
+               logger.log(Level.WARN ,  "Unable to parse log line in by error unknown"+logFile.getAbsolutePath() + " starting with  line " + logLine.substring(0, 60));
+              break;
             }
           }
         }

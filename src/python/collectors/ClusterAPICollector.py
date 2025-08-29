@@ -171,6 +171,8 @@ def getWorkers(options):
 
 
 def collectAPIData(options):
+    if '../' in options.ClusterName or '..\\'  in options.ClusterName:
+        raise Exception('Invalid file path')
     outputDir = options.ClusterName + '_' + datetime.date.today().isoformat()
     if not os.path.exists(outputDir):
         os.makedirs(outputDir)
